@@ -16,11 +16,11 @@ interface ReadableInterface
     /**
      * Gets all records by the specified options.
      *
-     * @param Data $options
+     * @param Data|null $options
      *
      * @return Collection<Model>
      */
-    public function all(Data $options): Collection;
+    public function all(?Data $options = null): Collection;
 
     /**
      * Finds a records by the specified id.

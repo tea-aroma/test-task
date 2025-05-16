@@ -54,11 +54,11 @@ class Repository implements ReadableInterface
     /**
      * Gets all records by the specified options.
      *
-     * @param Data $options
+     * @param Data|null $options
      *
      * @return Collection<Model>
      */
-    public function all(Data $options): Collection
+    public function all(?Data $options = null): Collection
     {
         return $this->model::all();
     }
