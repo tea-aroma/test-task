@@ -27,6 +27,11 @@ readonly class CurrencyValuesData extends Data
     public int $currency_id;
 
     /**
+     * @var int
+     */
+    public int $nominal;
+
+    /**
      * @var float
      */
     public float $value;
@@ -35,11 +40,6 @@ readonly class CurrencyValuesData extends Data
      * @var float
      */
     public float $vunit_rate;
-
-    /**
-     * @var int
-     */
-    public int $nominal;
 
     /**
      * @var string

@@ -34,11 +34,6 @@ readonly class CurrenciesData extends Data
     /**
      * @var string
      */
-    public string $nominal;
-
-    /**
-     * @var string
-     */
     public string $name;
 
     /**
