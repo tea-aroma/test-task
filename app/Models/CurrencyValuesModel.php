@@ -19,6 +19,18 @@ class CurrencyValuesModel extends Model
     protected $primaryKey = 'id';
 
     /**
+     * @var string[]
+     */
+    protected $fillable =
+        [
+            'currency_day_id',
+            'currency_id',
+            'nominal',
+            'value',
+            'vunit_rate',
+        ];
+
+    /**
      * @return BelongsTo
      */
     public function currency_day(): BelongsTo

@@ -16,4 +16,12 @@ class CurrencyDaysModel extends Model
      * @var string
      */
     protected $primaryKey = 'id';
+
+    /**
+     * @var string[]
+     */
+    protected $fillable =
+        [
+            'date',
+        ];
 }

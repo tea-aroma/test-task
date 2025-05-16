@@ -16,4 +16,15 @@ class CurrenciesModel extends Model
      * @var string
      */
     protected $primaryKey = 'id';
+
+    /**
+     * @var string[]
+     */
+    protected $fillable =
+        [
+            'valute_id',
+            'num_code',
+            'char_code',
+            'name',
+        ];
 }
