@@ -51,6 +51,11 @@ readonly abstract class Data
 
         foreach ((new \ReflectionClass($this))->getProperties() as $property)
         {
+            if (!$property->isInitialized($this))
+            {
+                continue;
+            }
+
             $array[ $property->getName() ] = $property->getValue($this);
         }
 
