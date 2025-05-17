@@ -5,13 +5,14 @@ namespace App\Data;
 
 
 use App\Standards\Data\Abstracts\Data;
+use App\Standards\Data\Interfaces\AttributableDataInterface;
 use App\Standards\Data\Interfaces\XMLParsableInterfaces;
 
 
 /**
  * @inheritDoc
  */
-readonly class HttpCurrenciesData extends Data implements XMLParsableInterfaces
+readonly class HttpCurrenciesData extends Data implements AttributableDataInterface, XMLParsableInterfaces
 {
     /**
      * @var string

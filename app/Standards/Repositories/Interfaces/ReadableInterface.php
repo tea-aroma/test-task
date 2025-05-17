@@ -4,6 +4,7 @@ namespace App\Standards\Repositories\Interfaces;
 
 
 use App\Standards\Data\Abstracts\Data;
+use App\Standards\Data\Interfaces\OptionableDataInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,11 +17,11 @@ interface ReadableInterface
     /**
      * Gets all records by the specified options.
      *
-     * @param Data|null $options
+     * @param OptionableDataInterface|null $options
      *
-     * @return Collection<Model>
+     * @return Collection<Model>|\Illuminate\Support\Collection<Data>
      */
-    public function all(?Data $options = null): Collection;
+    public function all(?OptionableDataInterface $options = null): Collection | \Illuminate\Support\Collection;
 
     /**
      * Finds a records by the specified id.

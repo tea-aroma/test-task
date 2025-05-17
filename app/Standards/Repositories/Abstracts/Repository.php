@@ -3,16 +3,13 @@
 namespace App\Standards\Repositories\Abstracts;
 
 
-use App\Standards\Data\Abstracts\Data;
-use App\Standards\Repositories\Interfaces\ReadableInterface;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 
 /**
  * Provides the base abstract logic for managing database tables.
  */
-class Repository implements ReadableInterface
+class Repository
 {
     /**
      * The model class or instance.
@@ -49,29 +46,5 @@ class Repository implements ReadableInterface
     public function exists(int $id): bool
     {
         return static::find($id) !== null;
-    }
-
-    /**
-     * Gets all records by the specified options.
-     *
-     * @param Data|null $options
-     *
-     * @return Collection<Model>
-     */
-    public function all(?Data $options = null): Collection
-    {
-        return $this->model::all();
-    }
-
-    /**
-     * Finds a record by the given id.
-     *
-     * @param int $id
-     *
-     * @return Model|null
-     */
-    public function find(int $id): ?Model
-    {
-        return $this->model->newQuery()->find($id);
     }
 }

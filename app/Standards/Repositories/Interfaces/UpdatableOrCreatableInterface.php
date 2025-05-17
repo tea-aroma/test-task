@@ -3,7 +3,7 @@
 namespace App\Standards\Repositories\Interfaces;
 
 
-use App\Standards\Data\Abstracts\Data;
+use App\Standards\Data\Interfaces\AttributableDataInterface;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -15,10 +15,10 @@ interface UpdatableOrCreatableInterface
     /**
      * Updates or creates a record by the specified attributes.
      *
-     * @param Data $attributes
-     * @param Data $values
+     * @param AttributableDataInterface $attributes
+     * @param AttributableDataInterface $values
      *
      * @return Model
      */
-    public function updateOrCreate(Data $attributes, Data $values): Model;
+    public function updateOrCreate(AttributableDataInterface $attributes, AttributableDataInterface $values): Model;
 }

@@ -3,6 +3,9 @@
 namespace App\Standards\Data\Abstracts;
 
 
+use Illuminate\Database\Eloquent\Model;
+
+
 /**
  * Provides help working for data properties.
  */
@@ -38,6 +41,18 @@ readonly abstract class Data
     public static function fromArray(array $values): static
     {
         return new static($values);
+    }
+
+    /**
+     * Creates a new instance by the specified model.
+     *
+     * @param Model $model
+     *
+     * @return static
+     */
+    public static function fromModel(Model $model): static
+    {
+        return new static($model->toArray());
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Standards\Repositories\Interfaces;
 
 
-use App\Standards\Data\Abstracts\Data;
+use App\Standards\Data\Interfaces\AttributableDataInterface;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -15,10 +15,10 @@ interface FindableOrCreatableInterface
     /**
      * Finds a record, if a record does not exist, creates a new record by the specified values.
      *
-     * @param Data $attributes
-     * @param Data $values
+     * @param AttributableDataInterface $attributes
+     * @param AttributableDataInterface $values
      *
      * @return Model
      */
-    public function findOrCreate(Data $attributes, Data $values): Model;
+    public function findOrCreate(AttributableDataInterface $attributes, AttributableDataInterface $values): Model;
 }

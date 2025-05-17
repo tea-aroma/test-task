@@ -4,12 +4,13 @@ namespace App\Data;
 
 
 use App\Standards\Data\Abstracts\Data;
+use App\Standards\Data\Interfaces\AttributableDataInterface;
 
 
 /**
  * @inheritDoc
  */
-readonly class CurrencyValuesData extends Data
+readonly class CurrencyValuesData extends Data implements AttributableDataInterface
 {
     /**
      * @var int

@@ -3,7 +3,7 @@
 namespace App\Standards\Repositories\Interfaces;
 
 
-use App\Standards\Data\Abstracts\Data;
+use App\Standards\Data\Interfaces\AttributableDataInterface;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -15,9 +15,9 @@ interface CreatableInterface
     /**
      * Creates a record by the specified attributes.
      *
-     * @param Data $attributes
+     * @param AttributableDataInterface $attributes
      *
      * @return Model
      */
-    public function create(Data $attributes): Model;
+    public function create(AttributableDataInterface $attributes): Model;
 }

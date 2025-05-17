@@ -3,7 +3,7 @@
 namespace App\Standards\Repositories\Interfaces;
 
 
-use App\Standards\Data\Abstracts\Data;
+use App\Standards\Data\Interfaces\AttributableDataInterface;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -15,9 +15,9 @@ interface UpdatableInterface
     /**
      * Updates a record by the specified attributes.
      *
-     * @param Data $attributes
+     * @param AttributableDataInterface $attributes
      *
      * @return Model
      */
-    public function update(Data $attributes): Model;
+    public function update(AttributableDataInterface $attributes): Model;
 }
