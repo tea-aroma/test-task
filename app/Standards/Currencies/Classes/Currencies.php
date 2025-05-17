@@ -137,4 +137,33 @@ class Currencies
 
         return (new CurrenciesRepository())->findOrCreate($attributes, $values);
     }
+
+    /**
+     * Determines whether a record exists by the specified date.
+     *
+     * @param string $date
+     *
+     * @return bool
+     */
+    public function hasCurrencyDay(string $date): bool
+    {
+        return (new CurrencyDaysRepository())->getByDate($date) !== null;
+    }
+
+    /**
+     * Handles the process of the currencies.
+     *
+     * @return void
+     */
+    public static function currenciesProcessing(): void
+    {
+        $currencies = new static();
+
+        if ($currencies->hasCurrencyDay(date('Y-m-d')))
+        {
+            return;
+        }
+
+        $currencies->save();
+    }
 }
