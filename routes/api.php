@@ -9,3 +9,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/currencies/list', [ CurrenciesController::class, 'list' ])->name('currencies.list');
+
+Route::get('/currencies/record', [ CurrenciesController::class, 'record' ])->name('currencies.record');

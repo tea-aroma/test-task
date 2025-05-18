@@ -8,6 +8,8 @@ use App\Data\ViewCurrenciesData;
 use App\Models\ViewCurrenciesModel;
 use App\Standards\Data\Interfaces\OptionableDataInterface;
 use App\Standards\Repositories\Abstracts\Repository;
+use App\Standards\Repositories\Interfaces\FindableByCodeInterface;
+use App\Standards\Repositories\Interfaces\FindableByOptionsInterface;
 use App\Standards\Repositories\Interfaces\ReadableInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -16,7 +18,7 @@ use Illuminate\Support\Collection;
 /**
  * @inheritDoc
  */
-class ViewCurrenciesRepository extends Repository implements ReadableInterface
+class ViewCurrenciesRepository extends Repository implements ReadableInterface, FindableByCodeInterface, FindableByOptionsInterface
 {
     /**
      * @inheritDoc
@@ -50,6 +52,11 @@ class ViewCurrenciesRepository extends Repository implements ReadableInterface
             $builder->where('currency_day_date', '=', $options->currency_day_date);
         }
 
+        if (isset($options->currency_day_date))
+        {
+            $builder->where('currency_day_date', '=', $options->currency_day_date);
+        }
+
         return $builder->get()->map(fn (ViewCurrenciesModel $model) => ViewCurrenciesData::fromModel($model));
     }
 
@@ -63,5 +70,54 @@ class ViewCurrenciesRepository extends Repository implements ReadableInterface
     public function find(int $id): ?ViewCurrenciesModel
     {
         return $this->model->newQuery()->find($id);
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @param string $code
+     * @param string $column
+     *
+     * @return Model|null
+     */
+    public function getByCode(string $code, string $column = 'date'): ?ViewCurrenciesModel
+    {
+        return $this->model->newQuery()->where($column, '=', $code)->first();
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @param OptionableDataInterface $options
+     *
+     * @return ViewCurrenciesModel|null
+     */
+    public function getByOptions(OptionableDataInterface $options): ?ViewCurrenciesModel
+    {
+        if (!is_a($options, ViewCurrenciesOptionsData::class))
+        {
+            throw new \LogicException('Options must be an instance of ViewCurrenciesOptionsData.');
+        }
+
+        $builder = $this->model->newQuery();
+
+        if (isset($options->currency_char_code))
+        {
+            $builder->where('currency_char_code', '=', $options->currency_char_code);
+        }
+
+        if (isset($options->currency_day_date))
+        {
+            $date = $options->currency_day_date;
+
+            if ($options->is_yesterday)
+            {
+                $date = date('Y-m-d', strtotime($date . ' -1 day'));
+            }
+
+            $builder->whereDate('currency_day_date', '=', $date);
+        }
+
+        return $builder->first();
     }
 }

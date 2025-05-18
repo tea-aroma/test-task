@@ -22,6 +22,20 @@ class CurrenciesController extends Controller
     {
         $options = ViewCurrenciesOptionsData::fromRequest(request());
 
-        return response()->json((new ViewCurrenciesRepository())->all($options)->toArray());
+        return response()->json([ 'status' => 'success', 'message' => '', 'data' => (new ViewCurrenciesRepository())->all($options)->toArray() ]);
+    }
+
+    /**
+     * Returns a record.
+     *
+     * @return JsonResponse
+     */
+    public function record(): JsonResponse
+    {
+        $options = ViewCurrenciesOptionsData::fromRequest(request());
+
+        $record = (new ViewCurrenciesRepository())->getByOptions($options);
+
+        return response()->json([ 'status' => 'success', 'message' => '', 'record' => $record?->toArray() ?? null ]);
     }
 }
