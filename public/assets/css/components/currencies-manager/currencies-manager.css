@@ -1,0 +1,5 @@
+.currencies-manager.columns
+{
+    display: flex;
+    flex-wrap: wrap;
+}
