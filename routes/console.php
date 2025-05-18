@@ -8,7 +8,7 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-\Illuminate\Support\Facades\Schedule::command('currencies:update')
+\Illuminate\Support\Facades\Schedule::command('currencies:update')->cron(str_replace('_', ' ', env('CURRENCIES_UPDATE_INTERVAL', '0_*_*_*_*')))
     ->onSuccess(function ()
     {
         \Illuminate\Support\Facades\Log::channel(LogChannelsEnum::CURRENCIES->value)->info('Successfully updated currencies.');

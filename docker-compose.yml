@@ -39,6 +39,14 @@ services:
         networks:
             - laravel
 
+    redis:
+        image: redis:alpine
+        container_name: laravel_redis
+        ports:
+            - "6379:6379"
+        networks:
+            - laravel
+
     cron:
         build:
             context: ./cron
