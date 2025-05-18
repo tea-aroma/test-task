@@ -13,6 +13,7 @@ use App\Standards\Repositories\Interfaces\FindableByOptionsInterface;
 use App\Standards\Repositories\Interfaces\ReadableInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 
 /**
@@ -26,6 +27,7 @@ class ViewCurrenciesRepository extends Repository implements ReadableInterface, 
      * @var string|Model
      */
     protected string|Model $model = ViewCurrenciesModel::class;
+
     /**
      * @inheritDoc
      *
@@ -40,21 +42,19 @@ class ViewCurrenciesRepository extends Repository implements ReadableInterface, 
             throw new \LogicException('Options must be an instance of ViewCurrenciesOptionsData.');
         }
 
-        $builder = $this->model->newQuery();
-
-        if (isset($options->includes))
+        return Cache::tags('currencies')->remember($this->toSha512($options), 36000, function () use ($options)
         {
-            $builder->whereIn($options->includes_key ?? 'currency_char_code', explode(',', $options->includes));
-        }
+            $builder = $this->model->newQuery();
 
-        $builder->where('currency_day_date', '=', $options->currency_day_date ?? date('Y-m-d'));
+            if (isset($options->includes))
+            {
+                $builder->whereIn($options->includes_key ?? 'currency_char_code', explode(',', $options->includes));
+            }
 
-        if (isset($options->currency_day_date))
-        {
-            $builder->where('currency_day_date', '=', $options->currency_day_date);
-        }
+            $builder->where('currency_day_date', '=', $options->currency_day_date ?? date('Y-m-d'));
 
-        return $builder->get()->map(fn (ViewCurrenciesModel $model) => ViewCurrenciesData::fromModel($model));
+            return $builder->get()->map(fn (ViewCurrenciesModel $model) => ViewCurrenciesData::fromModel($model));
+        });
     }
 
     /**

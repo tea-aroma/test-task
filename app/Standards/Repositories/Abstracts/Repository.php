@@ -47,4 +47,16 @@ class Repository
     {
         return static::find($id) !== null;
     }
+
+    /**
+     * Converts the given data to sha512.
+     *
+     * @param mixed $data
+     *
+     * @return string
+     */
+    protected function toSha512(mixed $data): string
+    {
+        return hash('sha512', json_encode($data));
+    }
 }

@@ -13,6 +13,7 @@ use App\Repositories\CurrenciesRepository;
 use App\Repositories\CurrencyDaysRepository;
 use App\Repositories\CurrencyValuesRepository;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -165,5 +166,7 @@ class Currencies
         }
 
         $currencies->save();
+
+        Cache::tags('currencies')->flush();
     }
 }
