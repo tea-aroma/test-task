@@ -55,12 +55,27 @@ class ViewCurrenciesData extends Data implements AttributableDataInterface
     /**
      * @var int
      */
+    public int $yesterday_nominal;
+
+    /**
+     * @var int
+     */
     public int $nominal;
 
     /**
      * @var float
      */
+    public float $yesterday_value;
+
+    /**
+     * @var float
+     */
     public float $value;
+
+    /**
+     * @var float
+     */
+    public float $yesterday_vunit_rate;
 
     /**
      * @var float

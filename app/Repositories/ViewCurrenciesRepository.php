@@ -47,10 +47,7 @@ class ViewCurrenciesRepository extends Repository implements ReadableInterface, 
             $builder->whereIn($options->includes_key ?? 'currency_char_code', explode(',', $options->includes));
         }
 
-        if (isset($options->currency_day_date))
-        {
-            $builder->where('currency_day_date', '=', $options->currency_day_date);
-        }
+        $builder->where('currency_day_date', '=', $options->currency_day_date ?? date('Y-m-d'));
 
         if (isset($options->currency_day_date))
         {
@@ -106,17 +103,14 @@ class ViewCurrenciesRepository extends Repository implements ReadableInterface, 
             $builder->where('currency_char_code', '=', $options->currency_char_code);
         }
 
-        if (isset($options->currency_day_date))
+        $date = $options->currency_day_date ?? date('Y-m-d');
+
+        if ($options->is_yesterday)
         {
-            $date = $options->currency_day_date;
-
-            if ($options->is_yesterday)
-            {
-                $date = date('Y-m-d', strtotime($date . ' -1 day'));
-            }
-
-            $builder->whereDate('currency_day_date', '=', $date);
+            $date = date('Y-m-d', strtotime($date . ' -1 day'));
         }
+
+        $builder->whereDate('currency_day_date', '=', $date);
 
         return $builder->first();
     }
