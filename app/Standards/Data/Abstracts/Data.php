@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Provides help working for data properties.
  */
-readonly abstract class Data
+abstract class Data
 {
     /**
      * @param array $values

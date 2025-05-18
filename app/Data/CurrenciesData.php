@@ -10,7 +10,7 @@ use App\Standards\Data\Interfaces\AttributableDataInterface;
 /**
  * @inheritDoc
  */
-readonly class CurrenciesData extends Data implements AttributableDataInterface
+class CurrenciesData extends Data implements AttributableDataInterface
 {
     /**
      * @var int

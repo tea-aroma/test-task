@@ -12,7 +12,7 @@ use App\Standards\Data\Interfaces\XMLParsableInterfaces;
 /**
  * @inheritDoc
  */
-readonly class HttpCurrenciesData extends Data implements AttributableDataInterface, XMLParsableInterfaces
+class HttpCurrenciesData extends Data implements AttributableDataInterface, XMLParsableInterfaces
 {
     /**
      * @var string

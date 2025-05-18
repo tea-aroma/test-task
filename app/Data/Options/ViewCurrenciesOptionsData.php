@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 /**
  * @inheritDoc
  */
-readonly class ViewCurrenciesOptionsData extends ViewCurrenciesData implements OptionableDataInterface, RequestParsableInterfaces
+class ViewCurrenciesOptionsData extends ViewCurrenciesData implements OptionableDataInterface, RequestParsableInterfaces
 {
     /**
      * @var string|null
@@ -23,6 +23,11 @@ readonly class ViewCurrenciesOptionsData extends ViewCurrenciesData implements O
      * @var string|null
      */
     public ?string $includes_key;
+
+    /**
+     * @var bool
+     */
+    public bool $is_yesterday = false;
 
     /**
      * @inheritDoc
