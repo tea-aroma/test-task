@@ -1,0 +1,24 @@
+@import './variables/colors.css';
+@import './components/header/header.css';
+@import './components/main/main.css';
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body
+{
+    height: 100%;
+}
+body
+{
+    font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
+    color: var(--dark);
+}
+svg *
+{
+    fill: currentColor;
+}
