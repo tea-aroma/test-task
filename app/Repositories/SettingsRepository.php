@@ -8,6 +8,7 @@ use App\Standards\Data\Interfaces\AttributableDataInterface;
 use App\Standards\Data\Interfaces\OptionableDataInterface;
 use App\Standards\Repositories\Abstracts\Repository;
 use App\Standards\Repositories\Interfaces\ReadableInterface;
+use App\Standards\Repositories\Interfaces\UpdatableInterface;
 use App\Standards\Repositories\Interfaces\UpdatableOrCreatableInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @inheritDoc
  */
-class SettingsRepository extends Repository implements ReadableInterface, UpdatableOrCreatableInterface
+class SettingsRepository extends Repository implements ReadableInterface, UpdatableOrCreatableInterface, UpdatableInterface
 {
     /**
      * @inheritDoc
@@ -60,5 +61,17 @@ class SettingsRepository extends Repository implements ReadableInterface, Updata
     public function updateOrCreate(AttributableDataInterface $attributes, AttributableDataInterface $values): SettingsModel
     {
         return $this->model->newQuery()->updateOrCreate($attributes->toArray(), $values->toArray());
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @param AttributableDataInterface $attributes
+     *
+     * @return int
+     */
+    public function update(AttributableDataInterface $attributes): int
+    {
+        return $this->model->newQuery()->where('id', $attributes->id)->update($attributes->toArray());
     }
 }

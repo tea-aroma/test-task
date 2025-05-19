@@ -83,6 +83,21 @@ class ViewCurrenciesData extends Data implements AttributableDataInterface
     public float $vunit_rate;
 
     /**
+     * @var bool
+     */
+    public bool $currency_setting_id;
+
+    /**
+     * @var bool
+     */
+    public bool $currency_setting_is_load;
+
+    /**
+     * @var bool
+     */
+    public bool $currency_setting_is_show;
+
+    /**
      * @var string
      */
     public string $created_at;

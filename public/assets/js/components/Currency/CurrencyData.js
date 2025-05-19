@@ -71,7 +71,7 @@ export class CurrencyData extends Data
      *
      * @type { number }
      */
-    yesterday_nominal;
+    yesterday_nominal = 0;
 
     /**
      * @public
@@ -85,7 +85,7 @@ export class CurrencyData extends Data
      *
      * @type { number }
      */
-    yesterday_value;
+    yesterday_value = 0;
 
     /**
      * @public
@@ -99,7 +99,7 @@ export class CurrencyData extends Data
      *
      * @type { number }
      */
-    yesterday_vunit_rate;
+    yesterday_vunit_rate = 0;
 
     /**
      * @public
@@ -107,6 +107,27 @@ export class CurrencyData extends Data
      * @type { number }
      */
     vunit_rate;
+
+    /**
+     * @public
+     *
+     * @type { number }
+     */
+    currency_setting_id = 0;
+
+    /**
+     * @public
+     *
+     * @type { boolean }
+     */
+    currency_setting_is_load = false;
+
+    /**
+     * @public
+     *
+     * @type { boolean }
+     */
+    currency_setting_is_show = false;
 
     /**
      * @public

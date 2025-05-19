@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Data\Options\ViewCurrenciesOptionsData;
 use App\Http\Controllers\Controller;
 use App\Repositories\ViewCurrenciesRepository;
+use App\Standards\ApiResponse\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
 
@@ -22,7 +23,7 @@ class CurrenciesController extends Controller
     {
         $options = ViewCurrenciesOptionsData::fromRequest(request());
 
-        return response()->json([ 'status' => 'success', 'message' => '', 'data' => (new ViewCurrenciesRepository())->all($options)->toArray() ]);
+        return ApiResponse::fromArray([ 'data'=> (new ViewCurrenciesRepository())->all($options)->toArray() ]);
     }
 
     /**
@@ -36,6 +37,6 @@ class CurrenciesController extends Controller
 
         $record = (new ViewCurrenciesRepository())->getByOptions($options);
 
-        return response()->json([ 'status' => 'success', 'message' => '', 'record' => $record?->toArray() ?? null ]);
+        return ApiResponse::fromArray([ 'record' => $record->toArray() ?? null ]);
     }
 }
