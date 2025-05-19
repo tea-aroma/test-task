@@ -42,7 +42,7 @@ class ViewCurrenciesRepository extends Repository implements ReadableInterface, 
             throw new \LogicException('Options must be an instance of ViewCurrenciesOptionsData.');
         }
 
-        return Cache::tags('currencies')->remember($this->toSha512($options), 36000, function () use ($options)
+        return Cache::remember($this->toSha512($options), 3600, function () use ($options)
         {
             $builder = $this->model->newQuery();
 

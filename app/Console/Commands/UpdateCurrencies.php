@@ -27,7 +27,9 @@ class UpdateCurrencies extends Command
      */
     public function handle(): void
     {
-        Currencies::currenciesProcessing();
+        $currencies = new Currencies();
+
+        $currencies->save();
 
         $this->info('Currencies updated successfully.');
     }

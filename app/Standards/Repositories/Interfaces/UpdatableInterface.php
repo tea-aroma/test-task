@@ -17,7 +17,7 @@ interface UpdatableInterface
      *
      * @param AttributableDataInterface $attributes
      *
-     * @return Model
+     * @return int
      */
-    public function update(AttributableDataInterface $attributes): Model;
+    public function update(AttributableDataInterface $attributes): int;
 }

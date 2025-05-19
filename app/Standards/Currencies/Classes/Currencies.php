@@ -4,12 +4,15 @@ namespace App\Standards\Currencies\Classes;
 
 
 use App\Data\CurrenciesData;
+use App\Data\CurrenciesSettingsData;
 use App\Data\CurrencyDaysData;
 use App\Data\CurrencyValuesData;
 use App\Data\HttpCurrenciesData;
 use App\Models\CurrenciesModel;
+use App\Models\CurrenciesSettingsModel;
 use App\Models\CurrencyDaysModel;
 use App\Repositories\CurrenciesRepository;
+use App\Repositories\CurrenciesSettingsRepository;
 use App\Repositories\CurrencyDaysRepository;
 use App\Repositories\CurrencyValuesRepository;
 use Illuminate\Support\Collection;
@@ -118,7 +121,8 @@ class Currencies
      */
     protected function findOrCreateCurrencyDay(HttpCurrenciesData $currency): CurrencyDaysModel
     {
-        $attributes = new CurrencyDaysData([ 'date' => date('Y-m-d', strtotime($currency->attribute_date)) ]);
+//        $attributes = new CurrencyDaysData([ 'date' => date('Y-m-d', strtotime($currency->attribute_date)) ]); The api date does not change.
+        $attributes = new CurrencyDaysData([ 'date' => date('Y-m-d') ]);
 
         return (new CurrencyDaysRepository())->findOrCreate($attributes, $attributes);
     }
@@ -136,7 +140,27 @@ class Currencies
 
         $values = new CurrenciesData($currency->toArray());
 
-        return (new CurrenciesRepository())->findOrCreate($attributes, $values);
+        $currencyModel = (new CurrenciesRepository())->findOrCreate($attributes, $values);
+
+        $this->updateOrCreateCurrencySetting($currencyModel);
+
+        return $currencyModel;
+    }
+
+    /**
+     * Finds or creates a currency record.
+     *
+     * @param CurrenciesModel $currency
+     *
+     * @return CurrenciesSettingsModel
+     */
+    protected function updateOrCreateCurrencySetting(CurrenciesModel $currency): CurrenciesSettingsModel
+    {
+        $attributes = new CurrenciesSettingsData([ 'currency_id' => $currency->id ]);
+
+        $values = new CurrenciesSettingsData($currency->toArray());
+
+        return (new CurrenciesSettingsRepository())->updateOrCreate($attributes, $values);
     }
 
     /**
@@ -152,6 +176,16 @@ class Currencies
     }
 
     /**
+     * Converts current instance to sha512.
+     *
+     * @return string
+     */
+    protected function toSha512(): string
+    {
+        return hash('sha512', json_encode($this));
+    }
+
+    /**
      * Handles the process of the currencies.
      *
      * @return void
@@ -160,13 +194,9 @@ class Currencies
     {
         $currencies = new static();
 
-        if ($currencies->hasCurrencyDay(date('Y-m-d')))
+        Cache::remember($currencies->toSha512(), 3600, function () use ($currencies)
         {
-            return;
-        }
-
-        $currencies->save();
-
-        Cache::tags('currencies')->flush();
+            $currencies->save();
+        });
     }
 }
