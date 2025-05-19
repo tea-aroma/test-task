@@ -2,12 +2,18 @@
 {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 100px;
     padding: 0 40px;
 }
 .header--style-default
 {
     border-bottom: 1px solid var(--light-gray);
+}
+.header__column
+{
+    display: flex;
+    align-items: center;
 }
 .header__icon
 {

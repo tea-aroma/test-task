@@ -3,6 +3,7 @@
 @import './components/currency/currency.css';
 @import './components/header/header.css';
 @import './components/main/main.css';
+@import './components/menu/menu.css';
 *
 {
     margin: 0;
