@@ -14,6 +14,7 @@ use App\Standards\Repositories\Interfaces\ReadableInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 
 /**
@@ -50,6 +51,10 @@ class ViewCurrenciesRepository extends Repository implements ReadableInterface, 
             {
                 $builder->whereIn($options->includes_key ?? 'currency_char_code', explode(',', $options->includes));
             }
+
+            Log::info($options->currency_setting_is_show);
+
+            $builder->where('currency_setting_is_show', '=', $options->currency_setting_is_show ?? true);
 
             $builder->where('currency_day_date', '=', $options->currency_day_date ?? date('Y-m-d'));
 

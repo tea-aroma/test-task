@@ -93,7 +93,12 @@ abstract class Data
                 continue;
             }
 
-            $property->setValue($this, $values[ $property->getName() ]);
+            if ($property->getType()->getName() === 'bool')
+            {
+                $values[ $property->getName() ] = $values[ $property->getName() ] === 'false' ? 0 : 1;
+            }
+
+            $this->{ $property->getName() } = $values[ $property->getName() ];
         }
 
         return $this;

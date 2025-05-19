@@ -28,8 +28,8 @@ return new class extends Migration
             cv1.vunit_rate,
             cv2.vunit_rate as yesterday_vunit_rate,
             cs.id as currency_setting_id,
-            cs.is_load as currency_setting_is_show,
-            cs.is_show as currency_setting_is_load,
+            cs.is_show as currency_setting_is_show,
+            cs.is_load as currency_setting_is_load,
             cv1.created_at,
             cv1.updated_at
             from currency_values cv1
