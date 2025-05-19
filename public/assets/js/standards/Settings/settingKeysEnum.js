@@ -14,4 +14,6 @@ export const SettingKeysEnum =
         CACHE_TIMEOUT: 'cache-timeout',
 
         CURRENCIES_URL: 'currencies-url',
+
+        WIDGET_COLUMNS: 'widget-columns',
     };

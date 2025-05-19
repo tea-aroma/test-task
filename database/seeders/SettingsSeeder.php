@@ -19,5 +19,7 @@ class SettingsSeeder extends Seeder
         SettingsModel::query()->updateOrCreate([ 'id' => 3 ], [ 'key' => 'cache-timeout', 'value' => '3600', 'description' => 'Cache timeout (seconds).' ]);
 
         SettingsModel::query()->updateOrCreate([ 'id' => 4 ], [ 'key' => 'currencies-url', 'value' => '', 'description' => 'Default in environment.' ]);
+
+        SettingsModel::query()->updateOrCreate([ 'id' => 5 ], [ 'key' => 'widget-columns', 'value' => '5', 'description' => 'Count of displayed columns.' ]);
     }
 }

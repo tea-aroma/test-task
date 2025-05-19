@@ -90,7 +90,7 @@ export class CurrenciesManagerSettings
      *
      * @type { number }
      */
-    columns = 4;
+    columns;
 
     /**
      * @public

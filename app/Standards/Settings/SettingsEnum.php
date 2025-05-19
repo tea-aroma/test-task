@@ -19,6 +19,8 @@ enum SettingsEnum: string
 
     case CURRENCIES_URL = 'currencies-url';
 
+    case WIDGET_COLUMNS = 'widget-columns';
+
 
     /**
      * Gets the value.

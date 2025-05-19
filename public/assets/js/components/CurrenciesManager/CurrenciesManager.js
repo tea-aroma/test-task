@@ -55,6 +55,11 @@ export class CurrenciesManager
      */
     async initialization()
     {
+        if (!this._settings.columns)
+        {
+            this._settings.columns = parseInt(await Settings.value(SettingKeysEnum.WIDGET_COLUMNS));
+        }
+
         if (!this._settings.delay)
         {
             this._settings.delay = parseInt(await Settings.value(SettingKeysEnum.WIDGET_AUTOUPDATE_INTERVAL));
