@@ -12,8 +12,12 @@ class SettingsSeeder extends Seeder
      */
     public function run(): void
     {
-        SettingsModel::query()->updateOrCreate([ 'id' => 1 ], [ 'key' => 'widget-autoupdate-interval', 'value' => '5000', 'description' => 'Autoupdate interval (ms).' ]);
+        SettingsModel::query()->updateOrCreate([ 'id' => 1 ], [ 'key' => 'widget-autoupdate-interval', 'value' => '5000', 'description' => 'Autoupdate interval (milliseconds).' ]);
 
         SettingsModel::query()->updateOrCreate([ 'id' => 2 ], [ 'key' => 'cron-autoupdate-interval', 'value' => '0 * * * *', 'description' => 'Cron autoupdate interval.' ]);
+
+        SettingsModel::query()->updateOrCreate([ 'id' => 3 ], [ 'key' => 'cache-timeout', 'value' => '3600', 'description' => 'Cache timeout (seconds).' ]);
+
+        SettingsModel::query()->updateOrCreate([ 'id' => 4 ], [ 'key' => 'currencies-url', 'value' => '', 'description' => 'Default in environment.' ]);
     }
 }

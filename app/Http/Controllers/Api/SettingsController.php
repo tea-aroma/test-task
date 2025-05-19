@@ -25,6 +25,18 @@ class SettingsController extends Controller
     }
 
     /**
+     * Gets a record by the specified key.
+     *
+     * @param string $key
+     *
+     * @return JsonResponse
+     */
+    public function get(string $key): JsonResponse
+    {
+        return ApiResponse::fromArray([ 'record' => (new SettingsRepository())->getByCode($key)->toArray() ]);
+    }
+
+    /**
      * Updates a record.
      *
      * @return JsonResponse

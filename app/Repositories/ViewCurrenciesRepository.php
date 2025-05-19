@@ -11,6 +11,7 @@ use App\Standards\Repositories\Abstracts\Repository;
 use App\Standards\Repositories\Interfaces\FindableByCodeInterface;
 use App\Standards\Repositories\Interfaces\FindableByOptionsInterface;
 use App\Standards\Repositories\Interfaces\ReadableInterface;
+use App\Standards\Settings\SettingsEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -43,7 +44,7 @@ class ViewCurrenciesRepository extends Repository implements ReadableInterface, 
             throw new \LogicException('Options must be an instance of ViewCurrenciesOptionsData.');
         }
 
-        return Cache::remember($this->toSha512($options), 3600, function () use ($options)
+        return Cache::tags('currencies')->remember($this->toSha512($options), SettingsEnum::CACHE_TIMEOUT->getValue(), function () use ($options)
         {
             $builder = $this->model->newQuery();
 

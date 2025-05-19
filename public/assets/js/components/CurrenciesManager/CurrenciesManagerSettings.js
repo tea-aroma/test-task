@@ -55,7 +55,7 @@ export class CurrenciesManagerSettings
      *
      * @type { number }
      */
-    delay = 5000;
+    delay;
 
     /**
      * @public

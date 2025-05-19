@@ -13,6 +13,7 @@ use App\Standards\Repositories\Interfaces\UpdatableInterface;
 use App\Standards\Repositories\Interfaces\UpdatableOrCreatableInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 
 /**
@@ -74,6 +75,8 @@ class CurrenciesSettingsRepository extends Repository implements ReadableInterfa
      */
     public function updateOrCreate(AttributableDataInterface $attributes, AttributableDataInterface $values): CurrenciesSettingsModel
     {
+        Cache::tags('currencies')->flush();
+
         return $this->model->newQuery()->updateOrCreate($attributes->toArray(), $values->toArray());
     }
 
@@ -86,6 +89,8 @@ class CurrenciesSettingsRepository extends Repository implements ReadableInterfa
      */
     public function update(AttributableDataInterface $attributes): int
     {
+        Cache::tags('currencies')->flush();
+
         return $this->model->newQuery()->where('id', $attributes->id)->update($attributes->toArray());
     }
 }

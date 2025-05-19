@@ -4,6 +4,8 @@ import { convertToURL } from '../../standards/functions/convertToURL.js';
 import { Currency } from '../Currency/Currency.js';
 import { CurrencyData } from '../Currency/CurrencyData.js';
 import { CurrenciesManagerDisplayTypesEnum } from './CurrenciesManagerDisplayTypesEnum.js';
+import { Settings } from '../../standards/Settings/Settings.js';
+import { SettingKeysEnum } from '../../standards/Settings/settingKeysEnum.js';
 
 
 /**
@@ -53,6 +55,11 @@ export class CurrenciesManager
      */
     async initialization()
     {
+        if (!this._settings.delay)
+        {
+            this._settings.delay = parseInt(await Settings.value(SettingKeysEnum.WIDGET_AUTOUPDATE_INTERVAL));
+        }
+
         this._url = convertToURL(this._settings.url);
 
         this._domElement = this._settings.domElement || this._createDomElement();

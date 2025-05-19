@@ -16,6 +16,8 @@ Route::get('/currencies/record', [ CurrenciesController::class, 'record' ])->nam
 
 Route::get('/settings/settings/list', [ SettingsController::class, 'list' ])->name('settings.settings.list');
 
+Route::get('/settings/settings/get/{code}', [ SettingsController::class, 'get' ])->name('settings.settings.get');
+
 Route::post('/settings/settings/update', [ SettingsController::class, 'update' ])->name('settings.settings.update');
 
 Route::get('/settings/currencies/list', [ CurrenciesSettingsController::class, 'list' ])->name('settings.currencies.list');

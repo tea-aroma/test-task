@@ -7,6 +7,7 @@ use App\Models\SettingsModel;
 use App\Standards\Data\Interfaces\AttributableDataInterface;
 use App\Standards\Data\Interfaces\OptionableDataInterface;
 use App\Standards\Repositories\Abstracts\Repository;
+use App\Standards\Repositories\Interfaces\FindableByCodeInterface;
 use App\Standards\Repositories\Interfaces\ReadableInterface;
 use App\Standards\Repositories\Interfaces\UpdatableInterface;
 use App\Standards\Repositories\Interfaces\UpdatableOrCreatableInterface;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @inheritDoc
  */
-class SettingsRepository extends Repository implements ReadableInterface, UpdatableOrCreatableInterface, UpdatableInterface
+class SettingsRepository extends Repository implements ReadableInterface, UpdatableOrCreatableInterface, UpdatableInterface, FindableByCodeInterface
 {
     /**
      * @inheritDoc
@@ -73,5 +74,18 @@ class SettingsRepository extends Repository implements ReadableInterface, Updata
     public function update(AttributableDataInterface $attributes): int
     {
         return $this->model->newQuery()->where('id', $attributes->id)->update($attributes->toArray());
+    }
+
+    /**
+     * @inheritDoc
+     * 
+     * @param string $code
+     * @param string $column
+     *
+     * @return SettingsModel|null
+     */
+    public function getByCode(string $code, string $column = 'key'): ?SettingsModel
+    {
+        return $this->model->newQuery()->where($column, $code)->first();
     }
 }

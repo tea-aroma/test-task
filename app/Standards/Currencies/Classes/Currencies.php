@@ -15,6 +15,7 @@ use App\Repositories\CurrenciesRepository;
 use App\Repositories\CurrenciesSettingsRepository;
 use App\Repositories\CurrencyDaysRepository;
 use App\Repositories\CurrencyValuesRepository;
+use App\Standards\Settings\SettingsEnum;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +37,7 @@ class Currencies
      */
     public function __construct(?string $url = null)
     {
-        $this->url = $url ?? env('CURRENCIES_URL');
+        $this->url = $url ?? SettingsEnum::CURRENCIES_URL->getValue();
     }
 
     /**
@@ -194,7 +195,7 @@ class Currencies
     {
         $currencies = new static();
 
-        Cache::remember($currencies->toSha512(), 3600, function () use ($currencies)
+        Cache::remember($currencies->toSha512(), SettingsEnum::CACHE_TIMEOUT->getValue(), function () use ($currencies)
         {
             $currencies->save();
         });
