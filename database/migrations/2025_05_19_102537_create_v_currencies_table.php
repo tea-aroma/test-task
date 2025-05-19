@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-
 return new class extends Migration
 {
     /**
@@ -11,7 +10,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('create or replace view v_currencies as
+        $this->down();
+
+        DB::statement('create view v_currencies as
             select cv1.id,
             cv1.currency_day_id,
             cd.date as currency_day_date,
