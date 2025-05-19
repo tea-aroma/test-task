@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="stylesheet" href="{{ asset('assets/css/pages/' . \Illuminate\Support\Facades\Route::currentRouteName() . '.css') }}">
 </head>
 <body>
