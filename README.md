@@ -93,6 +93,8 @@ Run seeder:
 docker compose exec app php artisan db:seed --class=DatabaseSeeder 
 ```
 
+Now the project should be available at: http://localhost:8000
+
 ---
 
 ## API
