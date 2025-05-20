@@ -7,8 +7,10 @@ A test project that provides currency and settings API endpoints. Built with Lar
 ### Clone the Repository
 
 ```bash
-https://github.com/tea-aroma/test-task.git
+git clone https://github.com/tea-aroma/test-task.git
+```
 
+```bash
 cd test-task/
 ```
 

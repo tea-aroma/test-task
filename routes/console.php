@@ -10,7 +10,7 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-if (!Schema::hasTable('settings'))
+if (Schema::hasTable('settings'))
 {
     \Illuminate\Support\Facades\Schedule::command('currencies:update')
         ->cron(str_replace('_', ' ', \App\Standards\Settings\SettingsEnum::CRON_AUTOUPDATE_INTERVAL->getValue()))
