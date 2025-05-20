@@ -26,6 +26,33 @@ cp .env.example .env
 
 Update `.env` with your custom values.
 
+#### Database
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=laravel
+DB_PASSWORD=secret
+```
+
+#### Cache & Queue (Redis)
+
+```dotenv
+QUEUE_CONNECTION=redis
+
+CACHE_STORE=redis
+
+REDIS_HOST=laravel_redis
+```
+
+#### External API URL
+
+```dotenv
+CURRENCIES_URL=%YOUR_URL%
+```
+
 ---
 
 ### Docker
@@ -63,40 +90,8 @@ docker compose exec app php artisan migrate
 Run seeder:
 
 ```bash
-docker compose exec app php artisan migrate db:seed --class=DatabaseSeeder 
+docker compose exec app php artisan db:seed --class=DatabaseSeeder 
 ```
-
----
-
-## Configurations
-
-Add the following to your `.env` file.
-
-### Database
-
-```dotenv
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=laravel
-DB_USERNAME=laravel
-DB_PASSWORD=secret
-```
-
-### Cache & Queue (Redis)
-
-```dotenv
-CACHE_STORE=redis
-QUEUE_CONNECTION=redis
-```
-
-### External API URL
-
-```dotenv
-CURRENCIES_URL=%YOUR_URL%
-```
-
-Now the project is available on `http://localhost:8000`. 
 
 ---
 
