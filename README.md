@@ -97,6 +97,20 @@ Now the project should be available at: http://localhost:8000
 
 ---
 
+## System Settings
+
+### Available variables
+
+| Key                          | Value        | Description                                 |
+|------------------------------|--------------|---------------------------------------------|
+| `widget-autoupdate-interval` | `5000`       | Widget auto-update interval (milliseconds). |
+| `cron-autoupdate-interval`   | `0 * * * *`  | Cron auto-update interval (CRON format).    |
+| `cache-timeout`              | `3600`       | Cache timeout duration (in seconds).        |
+| `currencies-url`             | *(from env)* | API endpoint for currencies.                |
+| `widget-columns`             | `5`          | Number of columns shown in the widget.      |
+
+---
+
 ## API
 
 ### Available routes
@@ -123,9 +137,9 @@ console.log(httpRequest.getResponse()); // HttpResponse interface.
 const settingData = '{...}'; // JSON with required properties.
 
 const httpRequest = await HttpRequest.send({
-    url: 'settings/settings/update',
-    method: 'post',
-    data: settingData
+	url: 'settings/settings/update',
+	method: 'post',
+	data: settingData
 });
 
 console.log(httpRequest.getResponse()); // HttpResponse interface.

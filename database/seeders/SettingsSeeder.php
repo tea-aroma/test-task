@@ -12,14 +12,14 @@ class SettingsSeeder extends Seeder
      */
     public function run(): void
     {
-        SettingsModel::query()->updateOrCreate([ 'id' => 1 ], [ 'key' => 'widget-autoupdate-interval', 'value' => '5000', 'description' => 'Autoupdate interval (milliseconds).' ]);
+        SettingsModel::query()->updateOrCreate([ 'id' => 1 ], [ 'key' => 'widget-autoupdate-interval', 'value' => '5000', 'description' => 'Widget auto-update interval (milliseconds).' ]);
 
-        SettingsModel::query()->updateOrCreate([ 'id' => 2 ], [ 'key' => 'cron-autoupdate-interval', 'value' => '0 * * * *', 'description' => 'Cron autoupdate interval.' ]);
+        SettingsModel::query()->updateOrCreate([ 'id' => 2 ], [ 'key' => 'cron-autoupdate-interval', 'value' => '0 * * * *', 'description' => 'Cron auto-update interval (CRON format).' ]);
 
-        SettingsModel::query()->updateOrCreate([ 'id' => 3 ], [ 'key' => 'cache-timeout', 'value' => '3600', 'description' => 'Cache timeout (seconds).' ]);
+        SettingsModel::query()->updateOrCreate([ 'id' => 3 ], [ 'key' => 'cache-timeout', 'value' => '3600', 'description' => 'Cache timeout duration (in seconds).' ]);
 
-        SettingsModel::query()->updateOrCreate([ 'id' => 4 ], [ 'key' => 'currencies-url', 'value' => '', 'description' => 'Default in environment.' ]);
+        SettingsModel::query()->updateOrCreate([ 'id' => 4 ], [ 'key' => 'currencies-url', 'value' => '', 'description' => 'API endpoint for currencies.' ]);
 
-        SettingsModel::query()->updateOrCreate([ 'id' => 5 ], [ 'key' => 'widget-columns', 'value' => '5', 'description' => 'Count of displayed columns.' ]);
+        SettingsModel::query()->updateOrCreate([ 'id' => 5 ], [ 'key' => 'widget-columns', 'value' => '5', 'description' => 'Number of columns shown in the widget.' ]);
     }
 }
