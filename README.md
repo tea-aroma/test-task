@@ -128,7 +128,7 @@ Now the project should be available at: http://localhost:8000
 ### Examples
 
 ```js
-const httpRequest = await httpRequest.send({ url: 'currencies/list', method: 'get' });
+const httpRequest = await HttpRequest.send({ url: 'api/currencies/list', method: 'get' });
 
 console.log(httpRequest.getResponse()); // HttpResponse interface.
 ```
@@ -137,7 +137,7 @@ console.log(httpRequest.getResponse()); // HttpResponse interface.
 const settingData = '{...}'; // JSON with required properties.
 
 const httpRequest = await HttpRequest.send({
-	url: 'settings/settings/update',
+	url: 'api/settings/settings/update',
 	method: 'post',
 	data: settingData
 });
